@@ -8,7 +8,7 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 export function Groups() {
-  const [groups, setGroup] = useState([]);
+  const [groups, setGroups] = useState<string[]>([]);
 
   return (
     <Container>
