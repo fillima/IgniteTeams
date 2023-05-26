@@ -7,10 +7,12 @@ import { Input } from "@components/Input";
 import { Filter } from "@components/Filter";
 import { FlatList } from "react-native";
 import { useState } from "react";
+import { PlayerCard } from "@components/PlayerCard";
+import { ListEmpty } from "@components/ListEmpty";
 
 export function Players() {
     const [team, setTeam] = useState("Time A");
-    const [players, setPlayers] = useState([]);
+    const [players, setPlayers] = useState(['Filipe', 'Anne', 'Gabi', 'Maria', 'Matheus', 'Laysla', 'Juninho', 'Yago']);
 
     return(
         <Container>
@@ -38,9 +40,28 @@ export function Players() {
                         />
                     )}
                     horizontal
+                    showsHorizontalScrollIndicator={false}
                 />
                 <NumberOfPlayers>{players.length}</NumberOfPlayers>
             </HeaderList>
+            <FlatList 
+                data={players}
+                keyExtractor={item => item}
+                renderItem={({item}) => (
+                    <PlayerCard
+                        name={item}
+                        onRemove={() => {}}    
+                    />
+                )}
+                ListEmptyComponent={
+                    <ListEmpty message='Não há pessoas cadastradas'/>
+                }
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[
+                    {paddingBottom: 100},
+                    players.length === 0 && {flex: 1}
+                ]}
+            />
             
             <Button
                 title="Remover turma"
